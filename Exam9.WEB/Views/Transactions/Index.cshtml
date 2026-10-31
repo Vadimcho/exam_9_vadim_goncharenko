@@ -1,27 +1,29 @@
-﻿@model Exam9.WEB.ViewModels.TransactionHistoryViewModel
+﻿
+@model Exam9.WEB.ViewModels.TransactionHistoryViewModel
+@inject IStringLocalizer<TransactionResource> L
 
 <div class="container mt-4">
-    <h1>История операций</h1>
+    <h1>@L["HistoryTitle"]</h1>
     <p>
-        Счёт:
+        @L["Account"]:
         <strong>@Model.AccountNumber</strong>
     </p>
     <div class="card mt-3">
         <div class="card-body">
-            <h5>Фильтр по датам</h5>
+            <h5>@L["DateFilter"]</h5>
             <form asp-controller="Transactions" asp-action="Index" method="get">
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label asp-for="DateFrom" class="form-label">Дата с</label>
+                        <label asp-for="DateFrom" class="form-label">@L["DateFrom"]</label>
                         <input asp-for="DateFrom" type="date" class="form-control" value="@Model.DateFrom?.ToString("yyyy-MM-dd")" />
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label asp-for="DateTo" class="form-label">Дата по</label>
+                        <label asp-for="DateTo" class="form-label">@L["DateTo"]</label>
                         <input asp-for="DateTo" type="date" class="form-control" value="@Model.DateTo?.ToString("yyyy-MM-dd")" />
                     </div>
                     <div class="col-md-4 d-flex align-items-end mb-3">
-                        <button type="submit" class="btn btn-primary me-2">Применить</button>
-                        <a asp-controller="Transactions" asp-action="Index" class="btn btn-outline-secondary">Сбросить</a>
+                        <button type="submit" class="btn btn-primary me-2">@L["Apply"]</button>
+                        <a asp-controller="Transactions" asp-action="Index" class="btn btn-outline-secondary">@L["Reset"]</a>
                     </div>
                 </div>
             </form>
@@ -37,14 +39,15 @@
             }
         </div>
     }
+
     <div class="table-responsive mt-4">
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Дата</th>
-                    <th>Тип операции</th>
-                    <th>Описание</th>
-                    <th>Сумма</th>
+                    <th>@L["Date"]</th>
+                    <th>@L["Type"]</th>
+                    <th>@L["Description"]</th>
+                    <th>@L["Amount"]</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,7 +55,7 @@
                 {
                     <tr>
                         <td colspan="4" class="text-center">
-                            Операций не найдено.
+                            @L["NoTransactions"]
                         </td>
                     </tr>
                 }
@@ -66,19 +69,19 @@
                                 @switch (transaction.Type)
                                 {
                                     case Exam9.DAL.Enums.TransactionType.Deposit:
-                                        <span>Пополнение</span>
+                                        @L["Deposit"]
                                         break;
 
                                     case Exam9.DAL.Enums.TransactionType.Transfer:
-                                        <span>Перевод</span>
+                                        @L["Transfer"]
                                         break;
 
                                     case Exam9.DAL.Enums.TransactionType.Payment:
-                                        <span>Оплата</span>
+                                        @L["Payment"]
                                         break;
                                 }
                             </td>
-                            <td>@transaction.Description</td> 
+                            <td>@transaction.Description</td>
                             <td class="@(transaction.IsIncoming ? "text-success" : "text-danger")">
                                 @(transaction.IsIncoming ? "+" : "-")@transaction.Amount.ToString("N2")
                             </td>

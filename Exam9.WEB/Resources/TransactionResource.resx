@@ -18,4 +18,67 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="HistoryTitle" xml:space="preserve">
+        <value>История операций</value>
+    </data>
+    <data name="Account" xml:space="preserve">
+        <value>Счёт</value>
+    </data>
+    <data name="DateFilter" xml:space="preserve">
+        <value>	Фильтр по датам</value>
+    </data>
+    <data name="DateFrom" xml:space="preserve">
+        <value>	Дата с</value>
+    </data>
+    <data name="DateTo" xml:space="preserve">
+        <value>	Дата по</value>
+    </data>
+    <data name="Apply" xml:space="preserve">
+        <value>Применить</value>
+    </data>
+    <data name="Reset" xml:space="preserve">
+        <value>Сбросить</value>
+    </data>
+    <data name="Date" xml:space="preserve">
+        <value>Дата</value>
+    </data>
+    <data name="Type" xml:space="preserve">
+        <value>	Тип операции</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Описание</value>
+    </data>
+    <data name="Amount" xml:space="preserve">
+        <value>Сумма</value>
+    </data>
+    <data name="NoTransactions" xml:space="preserve">
+        <value>	Операций не найдено.</value>
+    </data>
+    <data name="Deposit" xml:space="preserve">
+        <value>Пополнение</value>
+    </data>
+    <data name="Transfer" xml:space="preserve">
+        <value>Перевод</value>
+    </data>
+    <data name="Payment" xml:space="preserve">
+        <value>Оплата</value>
+    </data>
+    <data name="InvalidDateRange" xml:space="preserve">
+        <value>	Начальная дата не может быть позже конечной.</value>
+    </data>
+    <data name="DepositDescription" xml:space="preserve">
+        <value>Пополнение счёта</value>
+    </data>
+    <data name="TransferTo" xml:space="preserve">
+        <value>Перевод на счёт {0}</value>
+    </data>
+    <data name="TransferFrom" xml:space="preserve">
+        <value>	Перевод от счёта {0}</value>
+    </data>
+    <data name="PaymentDescription" xml:space="preserve">
+        <value>	Оплата: {0}</value>
+    </data>
+    <data name="OtherOperation" xml:space="preserve">
+        <value>Другая операция</value>
+</data>
 </root>

@@ -18,4 +18,73 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="WalletTitle" xml:space="preserve">
+        <value>	Электронный кошелёк</value>
+    </data>
+    <data name="MyAccount" xml:space="preserve">
+        <value>	Мой счёт</value>
+    </data>
+    <data name="AccountNumber" xml:space="preserve">
+        <value>Номер счёта</value>
+    </data>
+    <data name="Balance" xml:space="preserve">
+        <value>Баланс</value>
+    </data>
+    <data name="RegistrationPrompt" xml:space="preserve">
+        <value>Зарегистрируйтесь или войдите, чтобы пользоваться электронным кошельком.</value>
+    </data>
+    <data name="DepositTitle" xml:space="preserve">
+        <value>Пополнение счёта</value>
+    </data>
+    <data name="DepositAmount" xml:space="preserve">
+        <value>	Сумма пополнения</value>
+    </data>
+    <data name="DepositButton" xml:space="preserve">
+        <value>Пополнить</value>
+    </data>
+    <data name="DepositSuccess" xml:space="preserve">
+        <value>	Счёт успешно пополнен.</value>
+    </data>
+    <data name="AccountNotFound" xml:space="preserve">
+        <value>	Счёт не найден.</value>
+    </data>
+    <data name="TransferTitle" xml:space="preserve">
+        <value>	Перевод средств</value>
+    </data>
+    <data name="ReceiverAccountNumber" xml:space="preserve">
+        <value>Номер счёта получателя</value>
+    </data>
+    <data name="TransferAmount" xml:space="preserve">
+        <value>	Сумма перевода</value>
+    </data>
+    <data name="TransferButton" xml:space="preserve">
+        <value>Перевести</value>
+    </data>
+    <data name="UserNotFound" xml:space="preserve">
+        <value>	Пользователь не найден.</value>
+    </data>
+    <data name="TransferSuccess" xml:space="preserve">
+        <value>	Перевод успешно выполнен.</value>
+    </data>
+    <data name="ReceiverNotFound" xml:space="preserve">
+        <value>Счёт получателя не найден.</value>
+    </data>
+    <data name="SenderNotFound" xml:space="preserve">
+        <value>Ваш кошелёк не найден.</value>
+    </data>
+    <data name="InsufficientFunds" xml:space="preserve">
+        <value>	Недостаточно средств.</value>
+    </data>
+    <data name="SameAccount" xml:space="preserve">
+        <value>	Нельзя переводить деньги самому себе.</value>
+    </data>
+    <data name="TransferFailed" xml:space="preserve">
+        <value>	Не удалось выполнить перевод.</value>
+    </data>
+    <data name="AmountMustBePositive" xml:space="preserve">
+        <value>	Сумма должна быть больше нуля.</value>
+    </data>
+    <data name="InvalidAccountNumber" xml:space="preserve">
+        <value>	Некорректный номер счёта.</value>
+    </data>
 </root>

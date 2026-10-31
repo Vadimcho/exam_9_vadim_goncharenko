@@ -1,14 +1,17 @@
-﻿<h2>Вход</h2>
+﻿@inject IStringLocalizer<AccountResource> L
 
-<form asp-action="Login" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="mb-3">
-        <label for="accountNumber">Номер счёта</label>
-        <input type="text" name="accountNumber" class="form-control" required maxlength="6" pattern="[0-9]{6}" />
-    </div>
-    <div class="mb-3">
-        <label for="password">Пароль</label>
-        <input type="password" name="password" class="form-control" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Войти</button>
-</form>
+<div class="container mt-4">
+    <h2>@L["LoginTitle"]</h2>
+    <form asp-action="Login" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3">
+            <label for="accountNumber" class="form-label">@L["AccountNumber"]</label>
+            <input type="text" id="accountNumber" name="accountNumber" class="form-control" required maxlength="6" pattern="[0-9]{6}" />
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">@L["Password"]</label>
+            <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">@L["LoginButton"]</button>
+    </form>
+</div>

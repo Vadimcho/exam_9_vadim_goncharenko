@@ -21,7 +21,7 @@ namespace Exam9.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class WalletResource {
+    public class WalletResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -56,6 +56,213 @@ namespace Exam9.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Счёт не найден..
+        /// </summary>
+        internal static string AccountNotFound {
+            get {
+                return ResourceManager.GetString("AccountNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Номер счёта.
+        /// </summary>
+        internal static string AccountNumber {
+            get {
+                return ResourceManager.GetString("AccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Сумма должна быть больше нуля..
+        /// </summary>
+        internal static string AmountMustBePositive {
+            get {
+                return ResourceManager.GetString("AmountMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Баланс.
+        /// </summary>
+        internal static string Balance {
+            get {
+                return ResourceManager.GetString("Balance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Сумма пополнения.
+        /// </summary>
+        internal static string DepositAmount {
+            get {
+                return ResourceManager.GetString("DepositAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пополнить.
+        /// </summary>
+        internal static string DepositButton {
+            get {
+                return ResourceManager.GetString("DepositButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Счёт успешно пополнен..
+        /// </summary>
+        internal static string DepositSuccess {
+            get {
+                return ResourceManager.GetString("DepositSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пополнение счёта.
+        /// </summary>
+        internal static string DepositTitle {
+            get {
+                return ResourceManager.GetString("DepositTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Недостаточно средств..
+        /// </summary>
+        internal static string InsufficientFunds {
+            get {
+                return ResourceManager.GetString("InsufficientFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Некорректный номер счёта..
+        /// </summary>
+        internal static string InvalidAccountNumber {
+            get {
+                return ResourceManager.GetString("InvalidAccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Мой счёт.
+        /// </summary>
+        internal static string MyAccount {
+            get {
+                return ResourceManager.GetString("MyAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Номер счёта получателя.
+        /// </summary>
+        internal static string ReceiverAccountNumber {
+            get {
+                return ResourceManager.GetString("ReceiverAccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Счёт получателя не найден..
+        /// </summary>
+        internal static string ReceiverNotFound {
+            get {
+                return ResourceManager.GetString("ReceiverNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зарегистрируйтесь или войдите, чтобы пользоваться электронным кошельком..
+        /// </summary>
+        internal static string RegistrationPrompt {
+            get {
+                return ResourceManager.GetString("RegistrationPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Нельзя переводить деньги самому себе..
+        /// </summary>
+        internal static string SameAccount {
+            get {
+                return ResourceManager.GetString("SameAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваш кошелёк не найден..
+        /// </summary>
+        internal static string SenderNotFound {
+            get {
+                return ResourceManager.GetString("SenderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Сумма перевода.
+        /// </summary>
+        internal static string TransferAmount {
+            get {
+                return ResourceManager.GetString("TransferAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Перевести.
+        /// </summary>
+        internal static string TransferButton {
+            get {
+                return ResourceManager.GetString("TransferButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Не удалось выполнить перевод..
+        /// </summary>
+        internal static string TransferFailed {
+            get {
+                return ResourceManager.GetString("TransferFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Перевод успешно выполнен..
+        /// </summary>
+        internal static string TransferSuccess {
+            get {
+                return ResourceManager.GetString("TransferSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Перевод средств.
+        /// </summary>
+        internal static string TransferTitle {
+            get {
+                return ResourceManager.GetString("TransferTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Пользователь не найден..
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Электронный кошелёк.
+        /// </summary>
+        internal static string WalletTitle {
+            get {
+                return ResourceManager.GetString("WalletTitle", resourceCulture);
             }
         }
     }

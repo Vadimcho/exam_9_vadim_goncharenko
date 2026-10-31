@@ -3,6 +3,8 @@ using Exam9.DAL.Models;
 using Exam9.WEB.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Exam9.Resources;
+using Microsoft.Extensions.Localization;
 
 namespace Exam9.WEB.Controllers;
 
@@ -11,12 +13,14 @@ public class AccountController : Controller
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly IAccountService _accountService;
+    private readonly IStringLocalizer<AccountResource> _localizer;
 
-    public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService)
+    public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService, IStringLocalizer<AccountResource> localizer)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _accountService = accountService;
+        _localizer = localizer;
     }
 
     [HttpGet]
@@ -63,7 +67,7 @@ public class AccountController : Controller
         {
             await _userManager.DeleteAsync(user);
 
-            ModelState.AddModelError(string.Empty, "Не удалось создать кошелёк. Попробуйте ещё раз.");
+            ModelState.AddModelError(string.Empty, _localizer["WalletCreationFailed"].Value);
 
             return View(model);
         }
@@ -83,7 +87,7 @@ public class AccountController : Controller
 
         if (user == null)
         {
-            ModelState.AddModelError(string.Empty, "Неверный номер счёта или пароль.");
+            ModelState.AddModelError(string.Empty, _localizer["InvalidCredentials"].Value);
             return View();
         }
 
@@ -92,7 +96,7 @@ public class AccountController : Controller
         if (result.Succeeded)
             return RedirectToAction("Index", "Home");
 
-        ModelState.AddModelError(string.Empty, "Неверный номер счёта или пароль.");
+        ModelState.AddModelError(string.Empty, _localizer["InvalidCredentials"].Value);
 
         return View();
     }

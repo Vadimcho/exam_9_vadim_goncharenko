@@ -1,3 +1,4 @@
+using System.Globalization;
 using Exam9.BLL.Interfaces;
 using Exam9.BLL.Services;
 using Exam9.DAL.Data;
@@ -6,6 +7,7 @@ using Exam9.DAL.Interfaces;
 using Exam9.DAL.Models;
 using Exam9.DAL.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exam9;
@@ -18,6 +20,7 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        builder.Services.AddLocalization();
         string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connection))
             .AddIdentity<User, IdentityRole<int>>()
@@ -39,6 +42,20 @@ public class Program
         builder.Services.AddScoped<IAccountService, AccountService>();
 
         var app = builder.Build();
+        
+        var supportedCultures = new[]
+        {
+            new CultureInfo("ru-RU")
+        };
+
+        var localizationOptions = new RequestLocalizationOptions
+        {
+            DefaultRequestCulture = new RequestCulture("ru-RU"),
+            SupportedCultures = supportedCultures,
+            SupportedUICultures = supportedCultures
+        };
+
+        app.UseRequestLocalization(localizationOptions);
         
         using (var scope = app.Services.CreateScope())
         {

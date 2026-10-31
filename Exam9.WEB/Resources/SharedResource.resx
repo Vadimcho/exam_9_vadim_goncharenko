@@ -18,4 +18,26 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Home" xml:space="preserve">
+        <value>Главная</value>
+    </data>
+    <data name="Login" xml:space="preserve">
+        <value>Вход
+</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Регистрация</value>
+    </data>
+    <data name="Logout" xml:space="preserve">
+        <value>Выйти</value>
+    </data>
+    <data name="BackHome" xml:space="preserve">
+        <value>На главную</value>
+    </data>
+    <data name="ErrorTryAgain" xml:space="preserve">
+        <value>Произошла ошибка. Попробуйте ещё раз.</value>
+    </data>
+    <data name="ServerError" xml:space="preserve">
+        <value>	Ошибка сервера.</value>
+    </data>
 </root>

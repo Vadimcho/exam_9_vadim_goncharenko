@@ -1,21 +1,24 @@
-﻿@model Exam9.WEB.ViewModels.PaymentViewModel
+﻿
+@model Exam9.WEB.ViewModels.PaymentViewModel
+@inject IStringLocalizer<PaymentResource> L
+@inject IStringLocalizer<SharedResource> S
 
 <div class="container mt-4">
-    <h1>Оплата услуг</h1>
-    <div id="notification" class="alert d-none position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 2000; min-width: 300px;">
-    </div>
+    <h1>@L["PaymentTitle"]</h1>
+
+    <div id="notification" class="alert d-none position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 2000; min-width: 300px;"></div>
     <div class="card mt-4">
         <div class="card-body">
             <div class="alert alert-info">
-                Текущий баланс:
-                <strong id="balance">Загрузка...</strong>
+                @L["CurrentBalance"]
+                <strong id="balance">@L["Loading"]</strong>
             </div>
             <form id="paymentForm">
                 @Html.AntiForgeryToken()
                 <div class="mb-3">
-                    <label for="providerId" class="form-label">Поставщик услуг</label>
+                    <label for="providerId" class="form-label">@L["Provider"]</label>
                     <select id="providerId" name="ProviderId" class="form-select" required>
-                        <option value="">Выберите поставщика</option>
+                        <option value="">@L["SelectProvider"]</option>
                         @foreach (var provider in Model.Providers)
                         {
                             <option value="@provider.Id">
@@ -25,19 +28,21 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="providerAccountNumber" class="form-label">Номер лицевого счёта</label>
-                    <input type="text" id="providerAccountNumber" name="ProviderAccountNumber" class="form-control" maxlength="50" required/>
-                    <div class="form-text" id="accountHint">Выберите поставщика, чтобы увидеть тестовый номер лицевого счёта.</div>
+                    <label for="providerAccountNumber" class="form-label">
+                        @L["ProviderAccountNumber"]
+                    </label>
+                    <input type="text" id="providerAccountNumber" name="ProviderAccountNumber" class="form-control" maxlength="50" required />
+                    <div class="form-text" id="accountHint">@L["TestAccountHint"]</div>
                 </div>
                 <div class="mb-3">
-                    <label for="amount" class="form-label">Сумма оплаты</label>
-                    <input type="number" id="amount" name="Amount" class="form-control" min="0.01" step="0.01" required/>
+                    <label for="amount" class="form-label">@L["Amount"]</label>
+                    <input type="number" id="amount" name="Amount" class="form-control" min="0.01" step="0.01" required />
                 </div>
-                <button type="submit" class="btn btn-primary">Оплатить</button>
+                <button type="submit" class="btn btn-primary">@L["PayButton"]</button>
             </form>
         </div>
     </div>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary mt-3">На главную</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary mt-3">@S["BackHome"]</a>
 </div>
 
 @section Scripts {
@@ -46,23 +51,30 @@
         const accountHint = document.getElementById("accountHint");
 
         const testAccounts = {
-            "1": "Тестовый счёт: 0555123456 или 0555987654",
-            "2": "Тестовый счёт: 0700123456 или 0700987654",
-            "3": "Тестовый счёт: 0999123456 или 0999987654",
-            "4": "Тестовый счёт: 100001 или 100002",
-            "5": "Тестовый счёт: 200001 или 200002"
+            "1": ["0555123456", "0555987654"],
+            "2": ["0700123456", "0700987654"],
+            "3": ["0999123456", "0999987654"],
+            "4": ["100001", "100002"],
+            "5": ["200001", "200002"]
         };
 
-        providerSelect.addEventListener("change", function () {
-            const providerId = this.value;
+        const testAccountTemplate = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["TestAccount"].Value));
 
-            accountHint.textContent = testAccounts[providerId] ?? "Выберите поставщика, чтобы увидеть тестовый номер лицевого счёта.";
+        const defaultHint = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["TestAccountHint"].Value));
+
+        const errorMessage = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(S["ErrorTryAgain"].Value));
+
+        providerSelect.addEventListener("change", function () {
+            const accounts = testAccounts[this.value];
+
+            accountHint.textContent = accounts ? testAccountTemplate.replace("{0}", accounts[0]).replace("{1}", accounts[1]) : defaultHint;
         });
+
         async function updateBalance() {
             const response = await fetch("@Url.Action("GetBalance", "Home")");
 
             if (!response.ok) {
-                throw new Error("Не удалось получить баланс.");
+                throw new Error("Balance update failed");
             }
 
             const data = await response.json();
@@ -71,6 +83,7 @@
         }
 
         updateBalance();
+
         document.getElementById("paymentForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
@@ -85,23 +98,23 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error("Ошибка сервера.");
+                    throw new Error("Payment request failed");
                 }
 
                 const result = await response.json();
 
                 notification.textContent = result.message;
                 notification.classList.remove("d-none", "alert-success", "alert-danger");
-                notification.classList.add(result.success ? "alert-success" : "alert-danger"
-                );
+                notification.classList.add(result.success ? "alert-success" : "alert-danger");
 
                 if (result.success) {
                     form.reset();
+                    accountHint.textContent = defaultHint;
                     await updateBalance();
                 }
             }
             catch {
-                notification.textContent = "Произошла ошибка. Попробуйте ещё раз.";
+                notification.textContent = errorMessage;
                 notification.classList.remove("d-none", "alert-success");
                 notification.classList.add("alert-danger");
             }

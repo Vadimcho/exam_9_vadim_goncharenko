@@ -18,4 +18,79 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="PaymentTitle" xml:space="preserve">
+        <value>	Оплата услуг</value>
+    </data>
+    <data name="Provider" xml:space="preserve">
+        <value>	Поставщик услуг</value>
+    </data>
+    <data name="SelectProvider" xml:space="preserve">
+        <value>	Выберите поставщика</value>
+    </data>
+    <data name="MobileCommunications" xml:space="preserve">
+        <value>	Мобильная связь</value>
+    </data>
+    <data name="Internet" xml:space="preserve">
+        <value>Интернет</value>
+    </data>
+    <data name="Television" xml:space="preserve">
+        <value>Телевидение</value>
+    </data>
+    <data name="Other" xml:space="preserve">
+        <value>Другое</value>
+    </data>
+    <data name="ProviderAccountNumber" xml:space="preserve">
+        <value>	Номер лицевого счёта</value>
+    </data>
+    <data name="Amount" xml:space="preserve">
+        <value>	Сумма оплаты</value>
+    </data>
+    <data name="PayButton" xml:space="preserve">
+        <value>Оплатить</value>
+    </data>
+    <data name="PaymentSuccess" xml:space="preserve">
+        <value>	Оплата успешно выполнена.</value>
+    </data>
+    <data name="WalletNotFound" xml:space="preserve">
+        <value>Ваш кошелёк не найден.</value>
+    </data>
+    <data name="ProviderNotFound" xml:space="preserve">
+        <value>	Поставщик услуг не найден.</value>
+    </data>
+    <data name="AccountNotFound" xml:space="preserve">
+        <value>	Лицевой счёт у поставщика не найден.</value>
+    </data>
+    <data name="InsufficientFunds" xml:space="preserve">
+        <value>	Недостаточно средств на балансе.</value>
+    </data>
+    <data name="PaymentFailed" xml:space="preserve">
+        <value>	Не удалось выполнить оплату.</value>
+    </data>
+    <data name="EnterProviderAccount" xml:space="preserve">
+        <value>	Введите номер лицевого счёта.</value>
+    </data>
+    <data name="EnterAmount" xml:space="preserve">
+        <value>	Введите сумму.</value>
+    </data>
+    <data name="SelectProviderError" xml:space="preserve">
+        <value>	Выберите поставщика услуг.</value>
+    </data>
+    <data name="AmountMustBePositive" xml:space="preserve">
+        <value>Сумма должна быть больше нуля.</value>
+    </data>
+    <data name="TestAccountHint" xml:space="preserve">
+        <value>Выберите поставщика, чтобы увидеть тестовый номер лицевого счёта.</value>
+    </data>
+    <data name="TestAccount" xml:space="preserve">
+        <value>Тестовый счёт: {0} или {1}</value>
+    </data>
+    <data name="CheckInput" xml:space="preserve">
+        <value>Проверьте введённые данные.</value>
+    </data>
+    <data name="CurrentBalance" xml:space="preserve">
+        <value>	Текущий баланс:</value>
+    </data>
+    <data name="Loading" xml:space="preserve">
+        <value>	Загрузка...</value>
+    </data>
 </root>

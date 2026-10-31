@@ -1,10 +1,13 @@
+
 using Exam9.BLL.Interfaces;
 using Exam9.DAL.Enums;
 using Exam9.DAL.Models;
+using Exam9.Resources;
 using Exam9.WEB.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace Exam9.WEB.Controllers;
 
@@ -12,11 +15,13 @@ public class HomeController : Controller
 {
     private readonly UserManager<User> _userManager;
     private readonly IWalletService _walletService;
+    private readonly IStringLocalizer<WalletResource> _localizer;
 
-    public HomeController(UserManager<User> userManager, IWalletService walletService)
+    public HomeController(UserManager<User> userManager, IWalletService walletService, IStringLocalizer<WalletResource> localizer)
     {
         _userManager = userManager;
         _walletService = walletService;
+        _localizer = localizer;
     }
 
     public async Task<IActionResult> Index()
@@ -41,7 +46,7 @@ public class HomeController : Controller
 
         return View(model);
     }
-    
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Deposit(string accountNumber, decimal amount)
@@ -50,19 +55,10 @@ public class HomeController : Controller
         {
             var result = await _walletService.DepositAsync(accountNumber, amount);
 
-            if (!result)
-            {
-                return Json(new
-                {
-                    success = false,
-                    message = "Счёт не найден."
-                });
-            }
-
             return Json(new
             {
-                success = true,
-                message = "Счёт успешно пополнен."
+                success = result,
+                message = result ? _localizer["DepositSuccess"].Value : _localizer["AccountNotFound"].Value
             });
         }
         catch (ArgumentException ex)
@@ -74,7 +70,7 @@ public class HomeController : Controller
             });
         }
     }
-    
+
     [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -89,7 +85,7 @@ public class HomeController : Controller
                 return Json(new
                 {
                     success = false,
-                    message = "Пользователь не найден."
+                    message = _localizer["UserNotFound"].Value
                 });
             }
 
@@ -97,17 +93,17 @@ public class HomeController : Controller
 
             var message = result switch
             {
-                TransferResult.Success => "Перевод успешно выполнен.",
-                TransferResult.ReceiverNotFound => "Счёт получателя не найден.",
-                TransferResult.SenderNotFound => "Ваш кошелёк не найден.",
-                TransferResult.InsufficientFunds => "Недостаточно средств.",
-                TransferResult.SameAccount => "Нельзя переводить деньги самому себе.",
-                _ => "Не удалось выполнить перевод."
+                TransferResult.Success => _localizer["TransferSuccess"].Value,
+                TransferResult.ReceiverNotFound => _localizer["ReceiverNotFound"].Value,
+                TransferResult.SenderNotFound => _localizer["SenderNotFound"].Value,
+                TransferResult.InsufficientFunds => _localizer["InsufficientFunds"].Value,
+                TransferResult.SameAccount => _localizer["SameAccount"].Value,
+                _ => _localizer["TransferFailed"].Value
             };
 
             return Json(new
             {
-                success = result == TransferResult.Success, 
+                success = result == TransferResult.Success,
                 message
             });
         }
@@ -120,7 +116,7 @@ public class HomeController : Controller
             });
         }
     }
-    
+
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetBalance()
@@ -135,9 +131,6 @@ public class HomeController : Controller
         if (wallet == null)
             return NotFound();
 
-        return Json(new
-        {
-            balance = wallet.Balance
-        });
+        return Json(new { balance = wallet.Balance });
     }
 }

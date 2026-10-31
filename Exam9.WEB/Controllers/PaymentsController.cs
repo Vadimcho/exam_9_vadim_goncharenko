@@ -5,6 +5,8 @@ using Exam9.WEB.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Exam9.Resources;
+using Microsoft.Extensions.Localization;
 
 namespace Exam9.WEB.Controllers;
 
@@ -13,11 +15,13 @@ public class PaymentsController : Controller
 {
     private readonly IPaymentService _paymentService;
     private readonly UserManager<User> _userManager;
+    private readonly IStringLocalizer<PaymentResource> _localizer;
 
-    public PaymentsController(IPaymentService paymentService, UserManager<User> userManager)
+    public PaymentsController(IPaymentService paymentService, UserManager<User> userManager, IStringLocalizer<PaymentResource> localizer)
     {
         _paymentService = paymentService;
         _userManager = userManager;
+        _localizer = localizer;
     }
 
     [HttpGet]
@@ -33,10 +37,10 @@ public class PaymentsController : Controller
                 Name = p.Name,
                 ServiceType = p.ServiceType switch
                 {
-                    ServiceType.MobileCommunications => "Мобильная связь",
-                    ServiceType.Internet => "Интернет",
-                    ServiceType.Television => "Телевидение",
-                    _ => "Другое"
+                    ServiceType.MobileCommunications => _localizer["MobileCommunications"].Value,
+                    ServiceType.Internet => _localizer["Internet"].Value,
+                    ServiceType.Television => _localizer["Television"].Value,
+                    _ => _localizer["Other"].Value
                 }
             }).ToList()
         };
@@ -58,7 +62,7 @@ public class PaymentsController : Controller
                     message = ModelState.Values
                         .SelectMany(v => v.Errors)
                         .Select(e => e.ErrorMessage)
-                        .FirstOrDefault() ?? "Проверьте введённые данные."
+                        .FirstOrDefault() ?? _localizer["CheckInput"].Value
                 });
             }
 
@@ -73,12 +77,12 @@ public class PaymentsController : Controller
 
             var message = result switch
             {
-                PaymentResult.Success => "Оплата успешно выполнена.",
-                PaymentResult.WalletNotFound => "Ваш кошелёк не найден.",
-                PaymentResult.ProviderNotFound => "Поставщик услуг не найден.",
-                PaymentResult.AccountNotFound => "Лицевой счёт у поставщика не найден.",
-                PaymentResult.InsufficientFunds => "Недостаточно средств на балансе.",
-                _ => "Не удалось выполнить оплату."
+                PaymentResult.Success => _localizer["PaymentSuccess"].Value,
+                PaymentResult.WalletNotFound => _localizer["WalletNotFound"].Value,
+                PaymentResult.ProviderNotFound => _localizer["ProviderNotFound"].Value,
+                PaymentResult.AccountNotFound => _localizer["AccountNotFound"].Value,
+                PaymentResult.InsufficientFunds => _localizer["InsufficientFunds"].Value,
+                _ => _localizer["PaymentFailed"].Value
             };
 
             return Json(new

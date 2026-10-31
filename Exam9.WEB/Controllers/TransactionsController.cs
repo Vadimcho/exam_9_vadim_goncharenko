@@ -5,6 +5,8 @@ using Exam9.WEB.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Exam9.Resources;
+using Microsoft.Extensions.Localization;
 
 namespace Exam9.WEB.Controllers;
 
@@ -14,12 +16,14 @@ public class TransactionsController : Controller
     private readonly UserManager<User> _userManager;
     private readonly IWalletService _walletService;
     private readonly ITransactionService _transactionService;
+    private readonly IStringLocalizer<TransactionResource> _localizer;
 
-    public TransactionsController(UserManager<User> userManager, IWalletService walletService, ITransactionService transactionService)
+    public TransactionsController(UserManager<User> userManager, IWalletService walletService, ITransactionService transactionService, IStringLocalizer<TransactionResource> localizer)
     {
         _userManager = userManager;
         _walletService = walletService;
         _transactionService = transactionService;
+        _localizer = localizer;
     }
 
     [HttpGet]
@@ -37,7 +41,7 @@ public class TransactionsController : Controller
 
         if (dateFrom.HasValue && dateTo.HasValue && dateFrom.Value.Date > dateTo.Value.Date)
         {
-            ModelState.AddModelError("", "Начальная дата не может быть позже конечной.");
+            ModelState.AddModelError("", _localizer["InvalidDateRange"].Value);
             dateFrom = null;
             dateTo = null;
         }
@@ -55,11 +59,11 @@ public class TransactionsController : Controller
 
                 var description = t.Type switch
                 {
-                    TransactionType.Deposit => "Пополнение счёта",
-                    TransactionType.Transfer when t.SenderWalletId == wallet.Id => $"Перевод на счёт {t.ReceiverWallet?.AccountNumber}",
-                    TransactionType.Transfer => $"Перевод от счёта {t.SenderWallet?.AccountNumber}",
-                    TransactionType.Payment => $"Оплата: {t.ProviderAccount?.ServiceProvider?.Name}",
-                    _ => "Операция"
+                    TransactionType.Deposit => _localizer["DepositDescription"].Value,
+                    TransactionType.Transfer when t.SenderWalletId == wallet.Id => _localizer["TransferTo", t.ReceiverWallet?.AccountNumber].Value,
+                    TransactionType.Transfer => _localizer["TransferFrom", t.SenderWallet?.AccountNumber].Value,
+                    TransactionType.Payment => _localizer["PaymentDescription", t.ProviderAccount?.ServiceProvider?.Name].Value,
+                    _ => _localizer["OtherOperation"].Value
                 };
 
                 return new TransactionHistoryItemViewModel
