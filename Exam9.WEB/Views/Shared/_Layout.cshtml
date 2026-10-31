@@ -28,6 +28,9 @@
                         <li class="nav-item">
                             <span class="nav-link text-dark">@User.Identity.Name</span>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Transactions" asp-action="Index">История операций</a>
+                        </li>
                         <form asp-controller="Account" asp-action="Logout" method="post">
                             <button type="submit" class="btn btn-link">Выйти</button>
                         </form>

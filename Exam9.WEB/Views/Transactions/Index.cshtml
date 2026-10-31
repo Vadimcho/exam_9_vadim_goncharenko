@@ -1,0 +1,91 @@
+﻿@model Exam9.WEB.ViewModels.TransactionHistoryViewModel
+
+<div class="container mt-4">
+    <h1>История операций</h1>
+    <p>
+        Счёт:
+        <strong>@Model.AccountNumber</strong>
+    </p>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5>Фильтр по датам</h5>
+            <form asp-controller="Transactions" asp-action="Index" method="get">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="DateFrom" class="form-label">Дата с</label>
+                        <input asp-for="DateFrom" type="date" class="form-control" value="@Model.DateFrom?.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="DateTo" class="form-label">Дата по</label>
+                        <input asp-for="DateTo" type="date" class="form-control" value="@Model.DateTo?.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end mb-3">
+                        <button type="submit" class="btn btn-primary me-2">Применить</button>
+                        <a asp-controller="Transactions" asp-action="Index" class="btn btn-outline-secondary">Сбросить</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger mt-3">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Тип операции</th>
+                    <th>Описание</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Transactions.Count == 0)
+                {
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Операций не найдено.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var transaction in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@transaction.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>
+                                @switch (transaction.Type)
+                                {
+                                    case Exam9.DAL.Enums.TransactionType.Deposit:
+                                        <span>Пополнение</span>
+                                        break;
+
+                                    case Exam9.DAL.Enums.TransactionType.Transfer:
+                                        <span>Перевод</span>
+                                        break;
+
+                                    case Exam9.DAL.Enums.TransactionType.Payment:
+                                        <span>Оплата</span>
+                                        break;
+                                }
+                            </td>
+                            <td>@transaction.Description</td> 
+                            <td class="@(transaction.IsIncoming ? "text-success" : "text-danger")">
+                                @(transaction.IsIncoming ? "+" : "-")@transaction.Amount.ToString("N2")
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
