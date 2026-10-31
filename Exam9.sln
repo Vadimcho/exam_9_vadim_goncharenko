@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam9.WEB", "Exam9.WEB\Exam9.WEB.csproj", "{D2F5FD67-0564-4BDB-827F-544A0C771400}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam9.BLL", "Exam9.BLL\Exam9.BLL.csproj", "{5920BEA5-E6DF-4EA1-9E22-51060046056B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam9.DAL", "Exam9.DAL\Exam9.DAL.csproj", "{191502E6-CAFC-435B-A7B0-B6085D547D72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2F5FD67-0564-4BDB-827F-544A0C771400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F5FD67-0564-4BDB-827F-544A0C771400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F5FD67-0564-4BDB-827F-544A0C771400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F5FD67-0564-4BDB-827F-544A0C771400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5920BEA5-E6DF-4EA1-9E22-51060046056B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5920BEA5-E6DF-4EA1-9E22-51060046056B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5920BEA5-E6DF-4EA1-9E22-51060046056B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5920BEA5-E6DF-4EA1-9E22-51060046056B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191502E6-CAFC-435B-A7B0-B6085D547D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191502E6-CAFC-435B-A7B0-B6085D547D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191502E6-CAFC-435B-A7B0-B6085D547D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191502E6-CAFC-435B-A7B0-B6085D547D72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
