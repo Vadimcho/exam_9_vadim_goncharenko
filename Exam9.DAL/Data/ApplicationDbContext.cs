@@ -85,9 +85,16 @@ public class ApplicationDbContext: IdentityDbContext<User, IdentityRole<int>, in
             .HasMaxLength(100);
         
         builder.Entity<WalletAccount>()
-            .ToTable(t => t.HasCheckConstraint(
-                "CK_WalletAccounts_Balance",
-                "\"Balance\" >= 0"));
+            .ToTable(t =>
+            {
+                t.HasCheckConstraint(
+                    "CK_WalletAccounts_Balance",
+                    "\"Balance\" >= 0");
+
+                t.HasCheckConstraint(
+                    "CK_WalletAccounts_AccountNumber",
+                    "\"AccountNumber\" ~ '^[0-9]{6}$'");
+            });
 
         builder.Entity<ProviderAccount>()
             .ToTable(t => t.HasCheckConstraint(
@@ -98,12 +105,9 @@ public class ApplicationDbContext: IdentityDbContext<User, IdentityRole<int>, in
             .ToTable(t => t.HasCheckConstraint(
                 "CK_Transactions_Amount",
                 "\"Amount\" > 0"));
-
-        builder.Entity<WalletAccount>()
-            .ToTable(t => t.HasCheckConstraint(
-                "CK_WalletAccounts_AccountNumber",
-                "\"AccountNumber\" ~ '^[0-9]{6}$'"));
+        
+        builder.Entity<ServiceProvider>()
+            .HasIndex(s => new { s.Name, s.ServiceType })
+            .IsUnique();
     }
 }
-
-

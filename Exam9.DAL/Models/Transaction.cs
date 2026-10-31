@@ -10,7 +10,7 @@ public class Transaction
 
     public TransactionType Type { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public int? SenderWalletId { get; set; }
     public WalletAccount? SenderWallet { get; set; }

@@ -1,5 +1,10 @@
+using Exam9.BLL.Interfaces;
+using Exam9.BLL.Services;
 using Exam9.DAL.Data;
+using Exam9.DAL.Data.Seeders;
+using Exam9.DAL.Interfaces;
 using Exam9.DAL.Models;
+using Exam9.DAL.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,8 +28,22 @@ public class Program
             options.LoginPath = "/Account/Login";
             options.AccessDeniedPath = "/Account/AccessDenied";
         });
+        
+        builder.Services.AddScoped<IWalletRepository, WalletRepository>();
+        builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+        builder.Services.AddScoped<IProviderRepository, ProviderRepository>();
+        builder.Services.AddScoped<IWalletService, WalletService>();
+
+        builder.Services.AddScoped<IAccountService, AccountService>();
 
         var app = builder.Build();
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            await DataSeeder.SeedAsync(context);
+        }
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())

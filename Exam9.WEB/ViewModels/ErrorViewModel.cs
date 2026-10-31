@@ -1,4 +1,4 @@
-namespace Exam9.Models;
+namespace Exam9.WEB.ViewModels;
 
 public class ErrorViewModel
 {

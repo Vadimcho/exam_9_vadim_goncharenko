@@ -1,8 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Exam9.WEB.ViewModels.HomeViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h1>Электронный кошелёк</h1>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Мой счёт</h4>
+                <p>
+                    Номер счёта:
+                    <strong>@Model.AccountNumber</strong>
+                </p>
+                <p>
+                    Баланс:
+                    <strong>@Model.Balance?.ToString("N2")</strong>
+                </p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="mt-3">Зарегистрируйтесь или войдите, чтобы пользоваться электронным кошельком.</p>
+
+        <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Регистрация</a>
+        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary">Вход</a>
+    }
 </div>
