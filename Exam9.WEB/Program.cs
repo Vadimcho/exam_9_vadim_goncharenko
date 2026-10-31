@@ -34,6 +34,7 @@ public class Program
         builder.Services.AddScoped<IProviderRepository, ProviderRepository>();
         builder.Services.AddScoped<IWalletService, WalletService>();
         builder.Services.AddScoped<ITransactionService, TransactionService>();
+        builder.Services.AddScoped<IPaymentService, PaymentService>();
 
         builder.Services.AddScoped<IAccountService, AccountService>();
 
